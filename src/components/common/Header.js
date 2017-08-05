@@ -31,10 +31,10 @@ const styles = {
     backgroundColor: 'dodgerblue',
     height: 40,
     flexDirection: 'row',
-    padding: 10
+    paddingRight: 10
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 20,
     color: '#fff'
   },
   headerNav: {
