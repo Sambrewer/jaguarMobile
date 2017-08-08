@@ -1,24 +1,18 @@
-const SQLite = require('react-native-sqlite-storage');
+import {
+  GET_BROWSENODES
+} from '../actions/types';
 
-export default (state = null, action) => {
-  const browseNodes = [];
-  const db = SQLite.openDatabase({
-    name: 'main',
-    createFromLocation: '~jaguar.db',
-    location: 'Library'
-  }, this.openCB, this.errorCB);
+const INITIAL_STATE = {
+  browseNodes: [],
+  loading: true
+};
 
-  db.transaction((tx) => {
-    tx.executeSql(
-      'SELECT * FROM amazon_browsenode limit 25;',
-      [],
-      (tx, results) => {
-      const len = results.rows.length;
-      for (let i = 0; i < len; i++) {
-        const row = results.rows.item(i);
-        browseNodes.push(row);
-      }
-    });
-  });
-  return browseNodes;
+export default (state = INITIAL_STATE, action) => {
+  console.log(action, state);
+  switch (action.type) {
+    case GET_BROWSENODES:
+      return { ...state, browseNodes: action.payload, loading: false };
+    default:
+      return state;
+  }
 };

@@ -1,61 +1,39 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
+import { getBrowseNodes } from '../actions';
 import BrowseNode from './BrowseNode';
 import { Spinner } from './common';
 
-const SQLite = require('react-native-sqlite-storage');
-
 class BrowseCategories extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      browseNodes: []
-    };
-  }
-
   componentWillMount() {
-    const browseNodes = [];
-    const db = SQLite.openDatabase({
-      name: 'main',
-      createFromLocation: '~jaguar.db',
-      location: 'Library'
-    }, this.openCB, this.errorCB);
-
-    db.transaction((tx) => {
-      tx.executeSql(
-        'SELECT * FROM amazon_browsenode limit 26',
-        [],
-        (tx, results) => {
-        const len = results.rows.length;
-        for (let i = 1; i < len; i++) {
-          const row = results.rows.item(i);
-          browseNodes.push(row);
-        }
-        this.setState({ browseNodes });
-      });
-    });
+    this.props.getBrowseNodes();
   }
 
-  renderList() {
-    return this.state.browseNodes.map(browseNode =>
-      <BrowseNode key={browseNode.id} browseNode={browseNode} />
-    );
+  renderRows() {
+      if (!this.props.loading) {
+      return this.props.browseNodes.map(browseNode =>
+          <BrowseNode key={browseNode.id} browseNode={browseNode} />
+      );
+    }
+    return <Spinner size='large' />;
   }
 
   render() {
     return (
       <ScrollView>
-        {this.renderList()}
+        {this.renderRows()}
       </ScrollView>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return { browseNodes: state.browseNodes };
+  return {
+    browseNodes: state.browseNodes.browseNodes,
+    loading: state.browseNodes.loading
+  };
 };
 
-export default connect(mapStateToProps)(BrowseCategories);
+export default connect(mapStateToProps, { getBrowseNodes })(BrowseCategories);
