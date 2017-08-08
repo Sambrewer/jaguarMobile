@@ -2,19 +2,17 @@ import React, { Component } from 'react';
 import { ListView } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getBrowseNodes } from '../actions';
+import { getBrowseNodes } from '../../actions';
 import BrowseNode from './BrowseNode';
-import { Spinner } from './common';
+import { Spinner } from '../common';
 
 class BrowseCategories extends Component {
   componentWillMount() {
     this.props.getBrowseNodes();
-
-
   }
 
   renderRow(node) {
-    return <BrowseNode browseNode={node} />
+    return <BrowseNode browseNode={node} />;
   }
 
   render() {

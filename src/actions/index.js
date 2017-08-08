@@ -1,5 +1,5 @@
 import {
-  GET_BROWSENODES,
+  GET_BROWSENODES
 } from './types';
 
 const SQLite = require('react-native-sqlite-storage');

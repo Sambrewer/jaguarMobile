@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
-import BrowseCategories from './components/BrowseCategories';
+import BrowseCategories from './components/browseNodes/BrowseCategories';
 import { Header } from './components/common';
 
 const App = () => {
