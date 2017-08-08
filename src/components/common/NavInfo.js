@@ -1,19 +1,34 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Picker } from 'react-native';
 
-import { CardSection } from '../common';
+import { CardSection, SelectMenu } from '../common';
 
-const NavInfo = (props) => (
-  <CardSection>
-    <Text style={styles.textStyle}>{props.pageInfo}</Text>
-    <Text>Sort menu</Text>
-  </CardSection>
-);
+class NavInfo extends Component {
+
+
+  render() {
+    console.log(this.props);
+    return (
+      <CardSection>
+        <View style={styles.viewStyle}>
+          <Text style={styles.textStyle}>{this.props.pageInfo}</Text>
+          <SelectMenu selectOptions={this.props.sortParams} />  
+        </View>
+      </CardSection>
+    );
+  }
+}
 
 const styles = {
   textStyle: {
     color: '#000',
     fontSize: 16
+  },
+  viewStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1
   }
 };
 

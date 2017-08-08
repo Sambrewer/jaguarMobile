@@ -16,7 +16,7 @@ export const getBrowseNodes = () => {
     return (dispatch) => {
       db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM amazon_browsenode join amazon_search on amazon_browsenode.id = amazon_search.browse_node_id limit 26;',
+        'SELECT * FROM amazon_browsenode join amazon_search on amazon_browsenode.id = amazon_search.browse_node_id limit 101;',
         [],
         (tx, results) => {
         const len = results.rows.length;
