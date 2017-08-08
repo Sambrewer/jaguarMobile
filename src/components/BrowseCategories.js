@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ListView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getBrowseNodes } from '../actions';
@@ -9,27 +9,34 @@ import { Spinner } from './common';
 class BrowseCategories extends Component {
   componentWillMount() {
     this.props.getBrowseNodes();
+
+
   }
 
-  renderRows() {
-      if (!this.props.loading) {
-      return this.props.browseNodes.map(browseNode =>
-          <BrowseNode key={browseNode.id} browseNode={browseNode} />
-      );
-    }
-    return <Spinner size='large' />;
+  renderRow(node) {
+    return <BrowseNode browseNode={node} />
   }
 
   render() {
+    if (!this.props.loading) {
+      const ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      });
+
+      this.dataSource = ds.cloneWithRows(this.props.browseNodes);
     return (
-      <ScrollView>
-        {this.renderRows()}
-      </ScrollView>
+      <ListView
+        dataSource={this.dataSource}
+        renderRow={this.renderRow}
+      />
     );
+  }
+  return <Spinner size='large' />;
   }
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     browseNodes: state.browseNodes.browseNodes,
     loading: state.browseNodes.loading

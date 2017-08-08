@@ -22,19 +22,7 @@ export const getBrowseNodes = () => {
         const len = results.rows.length;
         for (let i = 1; i < len; i++) {
           const row = results.rows.item(i);
-          const imgUrlId = row.product_list.split('|')[0];
-          tx.executeSql(
-            `SELECT image_url FROM amazon_product where asin is '${imgUrlId}';`,
-            [],
-            (tx, imgresults) => {
-              const imgLen = imgresults.rows.length;
-              console.log(imgresults);
-              for (let j = 0; j <= imgLen; j++) {
-                const imgRow = imgresults.rows.item(j);
-                console.log(imgRow);
-              }
-            }
-          );
+          row.imgUrlId = row.product_list.split('|')[0];
           browseNodes.push(row);
           if (i === len - 1) {
             dispatch({ type: GET_BROWSENODES, payload: browseNodes });

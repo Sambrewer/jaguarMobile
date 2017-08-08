@@ -1,1 +1,2 @@
 export const GET_BROWSENODES = 'GET_BROWSENODES';
+export const GET_NODE_IMG = 'GET_NODE_IMG';
