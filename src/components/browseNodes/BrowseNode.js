@@ -15,8 +15,6 @@ class BrowseNode extends Component {
   componentWillMount() {
     const imgUrlId = this.props.browseNode.imgUrlId;
     const imgUrlIds = this.props.browseNode.product_list.split('|');
-    console.log(imgUrlIds);
-
     const db = SQLite.openDatabase({
       name: 'main',
       createFromLocation: '~jaguar.db',
@@ -34,7 +32,6 @@ class BrowseNode extends Component {
               const image_url = (results.rows.item(0));
 
               if (image_url !== '' && empty) {
-                console.log(image_url, empty);
                 empty = false;
                 this.setState({ image_url: image_url.image_url });
               }
