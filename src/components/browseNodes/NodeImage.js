@@ -7,7 +7,7 @@ class NodeImage extends Component {
 
   renderImageSection() {
     const { imageStyle } = styles;
-    if (this.props.image_url !== '') {
+    if (this.props.image_url) {
         return (
         <Image style={imageStyle} source={{ uri: this.props.image_url }} />
       );
@@ -16,12 +16,11 @@ class NodeImage extends Component {
       <View style={imageStyle}>
         <Text>No Image</Text>
       </View>
-    )
+    );
   }
 
   render() {
     const {
-      imageStyle,
       imageWrapper,
       footerStyle,
       textInfo,

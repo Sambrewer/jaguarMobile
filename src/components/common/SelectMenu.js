@@ -6,13 +6,18 @@ class SelectMenu extends Component {
     selected: 'Sort'
   }
 
+  onSortChange(selected) {
+    this.setState({ selected });
+
+    this.props.sortFunc(selected);
+  }
+
   render() {
     const { pickerStyle, itemStyle } = styles;
-    console.log(this.props.selectOptions);
     return (
       <View>
-        <Picker selectedValue={this.state.selected} itemStyle={itemStyle} style={pickerStyle} onValueChange={(val) => this.setState({ selected: val })}>
-          {this.props.selectOptions.map((option) => <Picker.Item key={option.val} label={option.name} value={option.name} />)}
+        <Picker selectedValue={this.state.selected} itemStyle={itemStyle} style={pickerStyle} onValueChange={e => { this.onSortChange(e); }}>
+          {this.props.selectOptions.map((option) => <Picker.Item key={option.val} label={option.name} value={option.val} />)}
         </Picker>
       </View>
     );

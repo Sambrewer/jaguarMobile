@@ -28,7 +28,7 @@ const Header = (props) => {
 
 const styles = {
   headerStyle: {
-    backgroundColor: 'dodgerblue',
+    backgroundColor: '#1E90FF',
     height: 40,
     flexDirection: 'row',
     paddingRight: 10
