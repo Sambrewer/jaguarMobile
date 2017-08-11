@@ -18,7 +18,7 @@ export const getBrowseNodes = () => {
     return (dispatch) => {
       db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM amazon_browsenode JOIN amazon_search ON amazon_browsenode.id = amazon_search.browse_node_id LIMIT 26;',
+        'SELECT * FROM amazon_browsenode JOIN amazon_search ON amazon_browsenode.id = amazon_search.browse_node_id LIMIT 100;',
         [],
         (tx, results) => {
         const len = results.rows.length;
@@ -49,7 +49,7 @@ export const sortCards = (params) => {
   return (dispatch) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `SELECT * FROM amazon_browsenode JOIN amazon_search ON amazon_browsenode.id = amazon_search.browse_node_id ORDER BY amazon_search.${params} LIMIT 25;`,
+        `SELECT * FROM amazon_browsenode JOIN amazon_search ON amazon_browsenode.id = amazon_search.browse_node_id ORDER BY amazon_search.${params} LIMIT 100;`,
         [],
         (tx, results) => {
           const len = results.rows.length;
